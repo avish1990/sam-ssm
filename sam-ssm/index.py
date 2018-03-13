@@ -3,7 +3,7 @@ import time
 import json
 import sys
 
-def lambda_handler(event, context):
+def handler(event, context):
 
     ssm = boto3.client('ssm')
     message = event['Records'][0]['Sns']['Message']
@@ -16,8 +16,8 @@ def lambda_handler(event, context):
       for instance in r['Instances']:  
 	
         if message.lower() == 'start':
-          status = ssm.send_command(DocumentName=documentName, TimeoutSeconds=timeout, Parameters={'commands': commandopen}, InstanceIds=[instance])
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandopen}, InstanceIds=[instance])
         elif message.lower() == 'stop':
-          status = ssm.send_command(DocumentName=documentName, TimeoutSeconds=timeout, Parameters={'commands': commandclose}, InstanceIds=[instance])
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandclose}, InstanceIds=[instance])
         else:
           print('Invalid Input')
