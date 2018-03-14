@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: 'SSM'
-      AutoPublishAlias: test1
+      AutoPublishAlias: !Sub '${AWS::StackName}'
       Handler: index.handler
       Runtime: python3.6
       CodeUri: .
