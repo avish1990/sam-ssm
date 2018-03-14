@@ -27,6 +27,6 @@ Resources:
     Properties:
       DisplayName: SNSTopic
       Subscription:
-        Protocol: lambda
-        Endpoint: !Ref SSM
+       - Protocol: lambda
+         Endpoint: !Ref SSM
     
