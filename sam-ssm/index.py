@@ -1,19 +1,23 @@
 import boto3
 import time
 import json
+import sys
 
-def lambda_handler(event, context):
-    
+def handler(event, context):
+
     ssm = boto3.client('ssm')
     message = event['Records'][0]['Sns']['Message']
-    instanceID = 'i-07ee8952c644f6aa1'
     documentName = 'AWS-RunShellScript'
     commandopen = ['iptables -I INPUT -p tcp --dport 8080 -j ACCEPT']
     commandclose  = ['iptables -I INPUT -p tcp --dport 8080 -j DROP']
-
-    if message.lower() == 'start':
-        status = ssm.send_command(DocumentName=documentName, TimeoutSeconds=timeout, Parameters={'commands': commandopen}, InstanceIds=[instanceID])
-    elif message.lower() == 'stop':
-        status = ssm.send_command(DocumentName=documentName, TimeoutSeconds=timeout, Parameters={'commands': commandclose}, InstanceIds=[instanceID])
-    else:
-        print('Invalid Input')
+    ec2 = boto3.client('ec2')
+    response = ec2.describe_instances()
+    for r in response['Reservations']:
+      for instance in r['Instances']:  
+        instanceid = instance['InstanceId'] 	
+        if message.lower() == 'start':
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandopen}, InstanceIds=[instanceid])
+        elif message.lower() == 'stop':
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandclose}, InstanceIds=[instanceid])
+        else:
+          print('Invalid Input')
