@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: 'SSM'
-      #AutoPublishAlias: live
+      AutoPublishAlias: test
       Handler: index.handler
       Runtime: python3.6
       CodeUri: .
@@ -14,6 +14,8 @@ Resources:
       MemorySize: 128
       Timeout: 3
       Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
+      DeploymentPreference:
+        Type: AllAtOnce
       Events:
         SNS:
           Type: SNS
@@ -22,4 +24,7 @@ Resources:
               Ref: SNSTopic
   SNSTopic:
     Type: 'AWS::SNS::Topic'
+    Environment:
+      Variables:
+        CurrentVersion: !Ref SSM.Version
     
