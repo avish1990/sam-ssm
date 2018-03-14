@@ -16,17 +16,14 @@ Resources:
       Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
       DeploymentPreference:
         Type: AllAtOnce
-      #Events:
-       # SNS:
-        #  Type: SNS
-         # Properties:
-          #  Topic:
-           #   Ref: SNSTopic
+      Events:
+        SNS:
+          Type: SNS
+          Properties:
+            Topic: !Ref SNSTopic
            
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
-      Subscription:
-        - Protocol: lambda
-          Endpoint: !GetAtt SSM..Alias
+      DisplayName: SNSTopic
     
