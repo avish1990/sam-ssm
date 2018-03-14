@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: 'SSM'
-      AutoPublishAlias: live
+      #AutoPublishAlias: live
       Handler: index.handler
       Runtime: python3.6
       CodeUri: .
@@ -22,6 +22,4 @@ Resources:
               Ref: SNSTopic
   SNSTopic:
     Type: 'AWS::SNS::Topic'
-    Properties:
-      Subscription:
-        Endpoint: !Ref SSM
+    
