@@ -14,10 +14,10 @@ def handler(event, context):
     response = ec2.describe_instances()
     for r in response['Reservations']:
       for instance in r['Instances']:  
-	
+        instanceid = instance['InstanceId'] 	
         if message.lower() == 'start':
-          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandopen}, InstanceIds=[instance])
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandopen}, InstanceIds=[instanceid])
         elif message.lower() == 'stop':
-          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandclose}, InstanceIds=[instance])
+          status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandclose}, InstanceIds=[instanceid])
         else:
           print('Invalid Input')
