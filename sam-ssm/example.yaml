@@ -28,5 +28,5 @@ Resources:
     Properties:
       Subscription:
         - Protocol: lambda
-          Endpoint: !GetAtt SSM..Arn
+          Endpoint: !GetAtt SSM..Alias
     
