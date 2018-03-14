@@ -13,7 +13,10 @@ Resources:
       Timeout: 3
       Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
       Events:
-        stream:
+        SNS:
           Type: SNS
           Properties:
-            Topic: arn:aws:sns:ap-south-1:712115679703:test
+            Topic:
+              Ref: SNSTopic
+  SNSTopic:
+    Type: 'AWS::SNS::Topic'
