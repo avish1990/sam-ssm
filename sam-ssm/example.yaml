@@ -14,8 +14,8 @@ Resources:
       MemorySize: 128
       Timeout: 3
       Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
-      #DeploymentPreference:
-       # Type: AllAtOnce
+      DeploymentPreference:
+        Type: AllAtOnce
       Events:
         MyTopic:
           Type: SNS
