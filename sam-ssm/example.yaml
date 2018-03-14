@@ -28,5 +28,5 @@ Resources:
       DisplayName: SNSTopic
       Subscription:
        - Protocol: lambda
-         Endpoint: !Ref SSM
+         Endpoint: SSM.Alias
     
