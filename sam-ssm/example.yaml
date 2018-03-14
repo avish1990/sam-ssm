@@ -26,4 +26,7 @@ Resources:
     Type: 'AWS::SNS::Topic'
     Properties:
       DisplayName: SNSTopic
+      subscription:
+        protocol: lambda
+        Endpoint: !Ref SSM
     
