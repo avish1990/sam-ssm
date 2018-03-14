@@ -19,5 +19,5 @@ def handler(event, context):
           status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandopen}, InstanceIds=[instanceid])
         elif message.lower() == 'stop':
           status = ssm.send_command(DocumentName=documentName, Parameters={'commands': commandclose}, InstanceIds=[instanceid])
-        else:
-          print('Invalid Input')
+        #else:
+          #print('Invalid Input')
