@@ -24,7 +24,8 @@ Resources:
               Ref: SNSTopic
   SNSTopic:
     Type: 'AWS::SNS::Topic'
-    Environment:
-      Variables:
-        CurrentVersion: !Ref SSM.Version
+    Properties:
+      Environment:
+        Variables:
+          CurrentVersion: !Ref SSM.Version
     
