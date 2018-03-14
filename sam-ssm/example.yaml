@@ -17,7 +17,7 @@ Resources:
       DeploymentPreference:
         Type: AllAtOnce
       Events:
-        SNS:
+        MyTopic:
           Type: SNS
           Properties:
             Topic: !Ref SNSTopic
@@ -26,7 +26,5 @@ Resources:
     Type: 'AWS::SNS::Topic'
     Properties:
       DisplayName: SNSTopic
-      Subscription:
-       - Protocol: lambda
-         Endpoint: !Ref SSM.Alias
+      
     
