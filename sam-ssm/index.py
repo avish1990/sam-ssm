@@ -5,7 +5,7 @@ import sys
 
 def handler(event, context):
 
-    #ssm = boto3.client('ssm')
+    ssm = boto3.client('ssm')
     message = event['Records'][0]['Sns']['Message']
     documentName = 'AWS-RunShellScript'
     commandopen = ['iptables -I INPUT -p tcp --dport 8080 -j ACCEPT']
