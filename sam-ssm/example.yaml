@@ -9,7 +9,7 @@ Resources:
       AutoPublishAlias: live
       Handler: index.handler
       Runtime: python3.6
-      CodeUri: 's3://snslambssm/sam-ssm.zip'
+      CodeUri: 'https://s3.ap-south-1.amazonaws.com/snslambssm/sam-ssm.zip'
       Description: ''
       MemorySize: 128
       Timeout: 3
