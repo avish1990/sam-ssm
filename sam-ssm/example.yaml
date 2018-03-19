@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: SSM
-      AutoPublishAlias:
+      AutoPublishAlias: prod
       Handler: index.handler
       Runtime: python3.6
       CodeUri:
@@ -21,11 +21,7 @@ Resources:
           Type: SNS
           Properties:
             Topic: !Ref SNSTopic
-  SSMVersion:
-    Type: 'AWS::Lambda::Version'
-    Properties:
-      FunctionName: !Ref SSM
-      Version: test
+  
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
