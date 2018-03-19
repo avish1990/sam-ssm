@@ -3,7 +3,7 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 Resources:
   SSM:
-    Type: 'AWS::Serverless::Function'
+    Type: 'AWS::Serverless::Version'
     Properties:
       FunctionName: 'SSM'
       Version:
