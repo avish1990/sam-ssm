@@ -1,10 +1,6 @@
 import boto3
-import time
-import json
-import sys
 
 def handler(event, context):
-
     ssm = boto3.client('ssm')
     message = event['Records'][0]['Sns']['Message']
     documentName = 'avish-port'
