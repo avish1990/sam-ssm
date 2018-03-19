@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Version'
     Properties:
       FunctionName: 'SSM'
-      Version:
+      Version: test
       AutoPublishAlias:
       Handler: index.handler
       Runtime: python3.6
