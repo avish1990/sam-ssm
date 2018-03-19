@@ -3,10 +3,9 @@ Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 Resources:
   SSM:
-    Type: 'AWS::Serverless::Version'
+    Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: 'SSM'
-      Version: test
       AutoPublishAlias:
       Handler: index.handler
       Runtime: python3.6
