@@ -6,10 +6,10 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: SSM
-      AutoPublishAlias: null
+      AutoPublishAlias:
       Handler: index.handler
       Runtime: python3.6
-      CodeUri: null
+      CodeUri:
       Description: ''
       MemorySize: 128
       Timeout: 3
