@@ -25,6 +25,7 @@ Resources:
     Type: 'AWS::Lambda::Version'
     Properties:
       FunctionName: !Ref SSM
+      Version:
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
