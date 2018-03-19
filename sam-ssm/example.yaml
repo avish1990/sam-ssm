@@ -1,15 +1,15 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: 2010-09-09
 Transform: 'AWS::Serverless-2016-10-31'
 Description: An AWS Serverless Specification template describing your function.
 Resources:
   SSM:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: 'SSM'
-      AutoPublishAlias:
+      FunctionName: SSM
+      AutoPublishAlias: null
       Handler: index.handler
       Runtime: python3.6
-      CodeUri:
+      CodeUri: null
       Description: ''
       MemorySize: 128
       Timeout: 3
@@ -21,10 +21,11 @@ Resources:
           Type: SNS
           Properties:
             Topic: !Ref SNSTopic
-           
+  SSM-Version:
+    Type: 'AWS::Lambda::Version'
+    Properties:
+      FunctionName: !Ref SSM
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
       DisplayName: SNSTopic
-      
-    
