@@ -10,7 +10,7 @@ Resources:
       Handler: index.handler
       Runtime: python3.6
       CodeUri:
-      Description: ''
+      Description: 'Filters listening port'
       MemorySize: 128
       Timeout: 3
       Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
@@ -22,13 +22,7 @@ Resources:
           Properties:
             Topic: !Ref SNSTopic
   
-  SSMVersion:
-    Type: "AWS::Lambda::Alias"
-    Properties:     
-      Description: Create an alias for previous version         
-      FunctionName: !Ref SSM
-      FunctionVersion:
-      Name: Dev
+  
   
   SNSTopic:
     Type: 'AWS::SNS::Topic'
