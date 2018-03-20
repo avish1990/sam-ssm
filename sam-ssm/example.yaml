@@ -22,15 +22,6 @@ Resources:
           Properties:
             Topic: !Ref SNSTopic
   
-  SSMVersion:
-    Type: "AWS::Lambda::Alias"
-    Properties:     
-      Description: Create an alias for previous version         
-      FunctionName: !Ref SSM
-      FunctionVersion:
-      Name: Dev
-  
-  
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
