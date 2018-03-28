@@ -1,0 +1,34 @@
+node {
+    
+  stage('clean workspace')
+  cleanWs()
+  
+  stage('Cloning repo') 
+  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/avish1990/sam-ssm.git']]])
+
+  stage('zip package')
+  sh 'cd sam-ssm && zip $BUILD_NUMBER.zip index.py'
+  
+  stage('push zip to S3')
+  sh 'cd sam-ssm && aws s3 cp $BUILD_NUMBER.zip s3://<BNAME>/'
+
+  stage('updating sam template with code URI')
+  sh 'cd sam-ssm && sed -i "s/CodeUri:/CodeUri: \'s3:\\\\/\\\\/snslambssm\\\\/$BUILD_NUMBER.zip\'/g" example.yaml'
+  
+  stage('Download code from S3, package and push to S3')
+  sh 'aws cloudformation package --template-file sam-ssm/example.yaml --output-template-file sam-ssm.yaml --s3-bucket <BNAME>'
+  
+  stage('Deploy')
+  sh 'aws cloudformation deploy --template-file sam-ssm.yaml --stack-name sam-ssm-deploy --capabilities CAPABILITY_IAM' 
+
+  stage('Tagging previous versions')
+  sh 'chmod +x sam-ssm/version.sh && export version=`./sam-ssm/version.sh` && aws lambda create-alias --function-name SSM --description "sample alias" --function-version $version --name QA-$BUILD_NUMBER || true'
+
+  stage('clean workspace')
+  cleanWs()
+  
+  stage('Delete zip from S3')
+  sh 'aws s3 rm s3://<BNAME>/$BUILD_NUMBER.zip'
+
+}
+
