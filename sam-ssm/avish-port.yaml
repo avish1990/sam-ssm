@@ -1,0 +1,12 @@
+schemaVersion: "2.2"
+description: "Document for port filtering"
+parameters:
+  Rule:
+    type: "String"
+    description: "Port filtering"
+mainSteps:
+- action: "aws:runShellScript"
+  name: "example"
+  inputs:
+    runCommand:
+    - "iptables -I INPUT -p tcp --dport 8080 -j {{Rule}}"
