@@ -5,7 +5,7 @@ Resources:
   SSM:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: SSM
+      FunctionName: RDS
       AutoPublishAlias: prod
       Handler: index.handler
       Runtime: python3.6
@@ -13,7 +13,7 @@ Resources:
       Description: 'Filters listening port'
       MemorySize: 128
       Timeout: 3
-      Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
+      Role: 'arn:aws:iam::712115679703:role/lambda_full_execution'
       DeploymentPreference:
         Type: AllAtOnce
       Events:
@@ -25,4 +25,4 @@ Resources:
   SNSTopic:
     Type: 'AWS::SNS::Topic'
     Properties:
-      DisplayName: SNSTopic
+      DisplayName: SNSTopicRDS
