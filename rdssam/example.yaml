@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS Serverless Specification template describing your function.
+Resources:
+  SSM:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: SSM
+      AutoPublishAlias: prod
+      Handler: index.handler
+      Runtime: python3.6
+      CodeUri:
+      Description: 'Filters listening port'
+      MemorySize: 128
+      Timeout: 3
+      Role: 'arn:aws:iam::712115679703:role/Lambda-ssm-ec2'
+      DeploymentPreference:
+        Type: AllAtOnce
+      Events:
+        MyTopic:
+          Type: SNS
+          Properties:
+            Topic: !Ref SNSTopic
+  
+  SNSTopic:
+    Type: 'AWS::SNS::Topic'
+    Properties:
+      DisplayName: SNSTopic
