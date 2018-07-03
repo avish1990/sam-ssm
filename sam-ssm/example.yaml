@@ -1,4 +1,4 @@
-# SAM Template to deploy Lambda function with Versions
+# SAM Template to deploy Lambda function with Versions and SNS Trigger.
 
 AWSTemplateFormatVersion: 2010-09-09
 Transform: 'AWS::Serverless-2016-10-31'
