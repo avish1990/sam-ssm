@@ -1,3 +1,6 @@
+# Jenkins Pipeling Job Config
+
+
 node {
     
   stage('clean workspace')
